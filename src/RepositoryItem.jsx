@@ -1,4 +1,5 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import Text from './Text';
 import theme from './theme';
 
 const styles = StyleSheet.create({
@@ -17,16 +18,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 15,
   },
-  fullName: {
-    fontWeight: theme.fontWeights.bold,
-  },
+
   descriptionContainer: {
     gap: 6,
     flexShrink: 1,
   },
-  description: {
-    fontWeight: theme.fontWeights.light,
-  },
+
   language: {
     backgroundColor: theme.colors.primary,
     alignSelf: 'flex-start',
@@ -38,12 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  statText: {
-    fontWeight: theme.fontWeights.light,
-  },
-  statValue: {
-    fontWeight: theme.fontWeights.bold,
-  },
+
   stat: {
     alignItems: 'center',
   },
@@ -76,28 +68,28 @@ const RepositoryItem = ({ repository }) => {
           style={styles.avatar}
         />
         <View style={styles.descriptionContainer}>
-          <Text style={styles.fullName}>{fullName}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text fontWeight='bold'>{fullName}</Text>
+          <Text color='textSecondary'>{description}</Text>
           <Text style={styles.language}>{language}</Text>
         </View>
       </View>
 
       <View style={styles.stats}>
         <View style={styles.stat}>
-          <Text style={styles.statValue}>{convertStat(stargazersCount)}</Text>
-          <Text style={styles.statText}>Stars</Text>
+          <Text fontWeight='bold'>{convertStat(stargazersCount)}</Text>
+          <Text color='textSecondary'>Stars</Text>
         </View>
         <View style={styles.stat}>
-          <Text style={styles.statValue}>{convertStat(forksCount)}</Text>
-          <Text style={styles.statText}>Forks</Text>
+          <Text fontWeight='bold'>{convertStat(forksCount)}</Text>
+          <Text color='textSecondary'>Forks</Text>
         </View>
         <View style={styles.stat}>
-          <Text style={styles.statValue}> {convertStat(reviewCount)}</Text>
-          <Text style={styles.statText}>Reviews</Text>
+          <Text fontWeight='bold'> {convertStat(reviewCount)}</Text>
+          <Text color='textSecondary'>Reviews</Text>
         </View>
         <View style={styles.stat}>
-          <Text style={styles.statValue}>{convertStat(ratingAverage)}</Text>
-          <Text style={styles.statText}>Rating</Text>
+          <Text fontWeight='bold'>{convertStat(ratingAverage)}</Text>
+          <Text color='textSecondary'>Rating</Text>
         </View>
       </View>
     </View>
