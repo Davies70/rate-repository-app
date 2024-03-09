@@ -1,17 +1,17 @@
 import { View } from 'react-native';
-import Text from './Text';
+import Text from '../Text';
 import { Link } from 'react-router-native';
 
-const AppBarTab = () => {
+const SignInTab = () => {
   return (
     <View>
-      <Link to='/'>
+      <Link to='/signin'>
         <Text fontWeight='bold' color='white' fontSize='subheading'>
-          Repositories
+          Sign in
         </Text>
       </Link>
     </View>
   );
 };
 
-export default AppBarTab;
+export default SignInTab;

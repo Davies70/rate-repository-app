@@ -1,9 +1,11 @@
 import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import theme from './theme';
-import AppBarTab from './AppBarTab';
-import SignInTab from './SignInTab';
+import theme from '../../theme';
+import Repositories from './Repositories';
+import SignIn from './SignIn';
+import SignOut from './SignOut';
 import { ScrollView } from 'react-native';
+import useUserReducer from '../../hooks/useUserReducer';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,11 +23,14 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const { user} = useUserReducer();
+  console.log('state in tab,', user);
   return (
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollview}>
-        <AppBarTab />
-        <SignInTab />
+        <Repositories />
+        {!user && <SignIn />}
+        {user && <SignOut />}
       </ScrollView>
     </View>
   );
