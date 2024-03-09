@@ -5,19 +5,17 @@ import { useApolloClient } from '@apollo/client';
 import useUserReducer from '../../hooks/useUserReducer';
 
 const SignOut = () => {
-  const { dispatch, state } = useUserReducer();
-  console.log(state)
+  const { dispatch } = useUserReducer();
+
   const authStorage = useAuthStorage();
 
   const apolloClient = useApolloClient();
   const signOut = async () => {
-    await authStorage.removeAccessToken();
     dispatch({
       type: 'SIGN_OUT',
     });
-
+    await authStorage.removeAccessToken();
     apolloClient.resetStore();
-    console.log('signed out');
   };
   return (
     <View>
