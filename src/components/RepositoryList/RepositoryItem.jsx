@@ -57,7 +57,7 @@ const RepositoryItem = ({ repository }) => {
     reviewCount,
     ratingAverage,
     ownerAvatarUrl,
-  } = repository.item;
+  } = repository;
   return (
     <View style={styles.container} testID='repositoryItem'>
       <View style={styles.header}>

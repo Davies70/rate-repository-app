@@ -11,7 +11,7 @@ const RepositoryList = () => {
     console.error('something went wrong getting repositories', error.message);
   }
 
-  return <RepositoryListContainer repositories={repositories.repositories} />;
+  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;

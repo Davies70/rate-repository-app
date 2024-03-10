@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 20,
-    margin: 5,
+    marginTop: 24,
   },
 });
 
