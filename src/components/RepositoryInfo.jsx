@@ -1,7 +1,5 @@
 import { View, Pressable, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryList/RepositoryItem';
-import { useParams } from 'react-router-native';
-import useRepository from '../hooks/useRepository';
 import Text from './Text';
 import theme from '../theme';
 import * as Linking from 'expo-linking';
@@ -27,16 +25,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryInfo = () => {
-  let { id } = useParams();
-  const { repository, loading, error } = useRepository(id);
-
+const RepositoryInfo = ({ repository }) => {
   const handlePress = async () => {
     Linking.openURL(repository.url);
   };
-
-  if (loading) return <Text>Loading...</Text>;
-  if (error) console.error('error getting repo', error.message);
 
   return (
     <View style={styles.main}>
