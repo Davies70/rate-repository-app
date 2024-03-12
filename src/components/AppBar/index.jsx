@@ -8,6 +8,7 @@ import { ScrollView } from 'react-native';
 import useUserReducer from '../../hooks/useUserReducer';
 import { useEffect } from 'react';
 import useAuthStorage from '../../hooks/useAuthStorage';
+import CreateReview from './CreateReview';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,12 +27,10 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const { user, dispatch } = useUserReducer();
-  console.log('user', user);
   const authStorage = useAuthStorage();
   useEffect(() => {
     const fetchUser = async () => {
       const token = await authStorage.getAccessToken();
-      console.log('token:', token);
       if (!user && token) {
         dispatch({
           type: 'SIGN_IN',
@@ -45,6 +44,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollview}>
         <Repositories />
+        {user && <CreateReview />}
         {!user && <SignIn />}
         {user && <SignOut />}
       </ScrollView>

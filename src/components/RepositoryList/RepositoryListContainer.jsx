@@ -1,6 +1,7 @@
 import { FlatList, View, StyleSheet, Pressable } from 'react-native';
 import RepositoryItem from './RepositoryItem';
-import { useNavigate } from 'react-router-native';
+import RepositoryListHeader from './RepositoryListHeader';
+import React from 'react';
 
 const styles = StyleSheet.create({
   separator: {
@@ -10,28 +11,51 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
-  const navigate = useNavigate();
-  const repositoryNodes = repositories
-    ? repositories.edges.map((edge) => edge.node)
-    : [];
+export default class RepositoryListContainer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  const onPress = (id) => {
-    navigate(`/repository/${id}`);
+  renderHeader = () => {
+    const props = this.props;
+    const {
+      repoSortType,
+      setRepoSortType,
+      searchKeyword,
+      setKeyword,
+      keyword,
+    } = props;
+
+    return (
+      <RepositoryListHeader
+        repoSortType={repoSortType}
+        setRepoSortType={setRepoSortType}
+        searchKeyword={searchKeyword}
+        setKeyword={setKeyword}
+        keyword={keyword}
+      />
+    );
   };
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={(repository) => (
-        <Pressable onPress={() => onPress(repository.item.id)}>
-          <RepositoryItem repository={repository.item} />
-        </Pressable>
-      )}
-      keyExtractor={(repository) => repository.id}
-    />
-  );
-};
+  get repositoryNodes() {
+    return this.props.repositories
+      ? this.props.repositories.edges.map((edge) => edge.node)
+      : [];
+  }
 
-export default RepositoryListContainer;
+  render() {
+    return (
+      <FlatList
+        ListHeaderComponent={this.renderHeader}
+        data={this.repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={(repository) => (
+          <Pressable onPress={() => this.props.onPress(repository.item.id)}>
+            <RepositoryItem repository={repository.item} />
+          </Pressable>
+        )}
+        keyExtractor={(repository) => repository.id}
+      />
+    );
+  }
+}

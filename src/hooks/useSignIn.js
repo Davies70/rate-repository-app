@@ -5,7 +5,7 @@ import { useApolloClient } from '@apollo/client';
 import useUserReducer from './useUserReducer';
 
 export const useSignIn = () => {
-  const { user, dispatch } = useUserReducer();
+  const { dispatch } = useUserReducer();
 
   const authStorage = useAuthStorage();
   const [mutate, result] = useMutation(SIGN_IN);
@@ -20,7 +20,6 @@ export const useSignIn = () => {
         type: 'SIGN_IN',
         payload: data,
       });
-      console.log('state on sign in', user)
       await authStorage.setAccessToken(data.authenticate.accessToken);
       apolloClient.resetStore();
       return data;
