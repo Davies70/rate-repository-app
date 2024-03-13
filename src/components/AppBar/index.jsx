@@ -9,6 +9,7 @@ import useUserReducer from '../../hooks/useUserReducer';
 import { useEffect } from 'react';
 import useAuthStorage from '../../hooks/useAuthStorage';
 import CreateReview from './CreateReview';
+import MyReviews from './MyReviews';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,6 +45,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollview}>
         <Repositories />
+        {user && <MyReviews />}
         {user && <CreateReview />}
         {!user && <SignIn />}
         {user && <SignOut />}

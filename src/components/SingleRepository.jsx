@@ -12,12 +12,16 @@ const SingleRepository = () => {
   });
   const ItemSeparator = () => <View style={styles.separator} />;
   let { id } = useParams();
-  const { repository, loading, error } = useRepository(id);
+  const { repository, loading, error, fetchMore } = useRepository(id, 1);
 
   if (loading) return <Text>Loading...</Text>;
   if (error) console.error('error getting repo', error.message);
 
   const reviews = repository.reviews.edges.map((edge) => edge.node);
+  const onEndReached = () => {
+    console.log('reached end');
+    fetchMore()
+  };
   return (
     <FlatList
       data={reviews}
@@ -30,6 +34,7 @@ const SingleRepository = () => {
         </>
       )}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReached}
     />
   );
 };

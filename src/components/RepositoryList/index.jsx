@@ -16,10 +16,18 @@ const RepositoryList = () => {
     navigate(`/repository/${id}`);
   };
 
-  const { repositories, loading, error } = useRepositories(
+  const first = 3;
+
+  const { repositories, loading, error, fetchMore } = useRepositories(
     repoSortType,
-    searchKeyword
+    searchKeyword,
+    first
   );
+
+  const onEndReached = () => {
+    console.log('reached end of the list')
+    fetchMore();
+  };
 
   if (loading) {
     return <Text>Loading...</Text>;
@@ -35,6 +43,7 @@ const RepositoryList = () => {
       setKeyword={setKeyword}
       keyword={keyword}
       onPress={onPress}
+      onEndReached={onEndReached}
     />
   );
 };

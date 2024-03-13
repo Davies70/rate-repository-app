@@ -55,6 +55,7 @@ export default class RepositoryListContainer extends React.Component {
           </Pressable>
         )}
         keyExtractor={(repository) => repository.id}
+        onEndReached={this.props.onEndReached}
       />
     );
   }

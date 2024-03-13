@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReviewItem = ({ review }) => {
+const ReviewItem = ({ review, isMyReviews }) => {
   const formattedDate = format(new Date(review.createdAt), 'dd.MM.yyyy');
   return (
     <View style={styles.container}>
@@ -38,7 +38,7 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={styles.right}>
         <Text fontSize='subheading' fontWeight='bold'>
-          {review.user.username}
+          {isMyReviews ? review.repository.name : review.user.username}
         </Text>
         <View>
           <Text color='textSecondary'>{formattedDate}</Text>
